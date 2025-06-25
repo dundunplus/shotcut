@@ -1058,6 +1058,17 @@ void TimelineDock::setupActions()
     });
     Actions.add("timelineRectangleSelectAction", action);
 
+    action = new QAction(tr("Adjust Clip Gain/Volume"), this);
+    action->setCheckable(true);
+    action->setChecked(Settings.timelineAdjustGain());
+    connect(action, &QAction::triggered, this, [&](bool checked) {
+        Settings.setTimelineAdjustGain(checked);
+    });
+    connect(&Settings, &ShotcutSettings::timelineAdjustGainChanged, action, [=]() {
+        action->setChecked(Settings.timelineAdjustGain());
+    });
+    Actions.add("timelineAdjustGainAction", action);
+
     action = new QAction(tr("Automatically Add Tracks"), this);
     action->setCheckable(true);
     action->setChecked(Settings.timelineAutoAddTracks());
@@ -1793,7 +1804,9 @@ void TimelineDock::setCurrentTrack(int currentTrack)
 
 int TimelineDock::currentTrack() const
 {
-    return m_currentTrack;
+    return qBound(0,
+                  m_currentTrack,
+                  m_model.trackList().isEmpty() ? 0 : m_model.trackList().size() - 1);
 }
 
 void TimelineDock::setSelectionFromJS(const QVariantList &list)

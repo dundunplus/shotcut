@@ -964,6 +964,17 @@ void ShotcutSettings::setTimelineRectangleSelect(bool b)
     emit timelineRectangleSelectChanged();
 }
 
+bool ShotcutSettings::timelineAdjustGain() const
+{
+    return settings.value("timeline/adjustGain", true).toBool();
+}
+
+void ShotcutSettings::setTimelineAdjustGain(bool b)
+{
+    settings.setValue("timeline/adjustGain", b);
+    emit timelineAdjustGainChanged();
+}
+
 QString ShotcutSettings::filterFavorite(const QString &filterName)
 {
     return settings.value("filter/favorite/" + filterName, "").toString();
@@ -1401,14 +1412,24 @@ QList<QKeySequence> ShotcutSettings::shortcuts(const QString &name)
     return shortcuts;
 }
 
-double ShotcutSettings::slideshowClipDuration(double defaultClipDuration) const
+double ShotcutSettings::slideshowImageDuration(double defaultSeconds) const
 {
-    return settings.value("slideshow/clipDuration", defaultClipDuration).toDouble();
+    return settings.value("slideshow/clipDuration", defaultSeconds).toDouble();
 }
 
-void ShotcutSettings::setSlideshowClipDuration(double clipDuration)
+void ShotcutSettings::setSlideshowImageDuration(double seconds)
 {
-    settings.setValue("slideshow/clipDuration", clipDuration);
+    settings.setValue("slideshow/clipDuration", seconds);
+}
+
+double ShotcutSettings::slideshowAudioVideoDuration(double defaultSeconds) const
+{
+    return settings.value("slideshow/audioVideoDuration", defaultSeconds).toDouble();
+}
+
+void ShotcutSettings::setSlideshowAudioVideoDuration(double seconds)
+{
+    settings.setValue("slideshow/audioVideoDuration", seconds);
 }
 
 int ShotcutSettings::slideshowAspectConversion(int defaultAspectConversion) const
