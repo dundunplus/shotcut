@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014-2022 Meltytech, LLC
+ * Copyright (c) 2014-2026 Meltytech, LLC
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -43,7 +43,6 @@ void QmlFile::setUrl(QString text)
 {
     QUrl url = text.replace('\\', "/");
     QString s = url.toString();
-    ;
     QUrl::FormattingOptions options = QUrl::RemoveScheme | QUrl::RemovePassword
                                       | QUrl::RemoveUserInfo | QUrl::RemovePort
                                       | QUrl::RemoveAuthority | QUrl::RemoveQuery;
@@ -58,6 +57,10 @@ void QmlFile::setUrl(QString text)
     // If the scheme is a drive letter, do not remove it.
     if (url.scheme().size() == 1) {
         options ^= QUrl::RemoveScheme;
+    }
+    // RemoveAuthority removes the server from a UNC path.
+    if (s.startsWith("//")) {
+        options ^= QUrl::RemoveAuthority;
     }
 #endif
 
