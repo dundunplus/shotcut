@@ -102,7 +102,7 @@ LIBWEBP_HEAD=0
 LIBWEBP_REVISION="v1.6.0"
 ENABLE_LIBSPATIALAUDIO=1
 LIBSPATIALAUDIO_HEAD=0
-LIBSPATIALAUDIO_REVISION="origin/patch-1"
+LIBSPATIALAUDIO_REVISION="0.4.0"
 ENABLE_WHISPERCPP=1
 WHISPERCPP_HEAD=0
 WHISPERCPP_REVISION="v1.8.3"
@@ -563,7 +563,7 @@ function set_globals {
   REPOLOCS[3]="https://github.com/mirror/x264.git"
   REPOLOCS[4]="https://chromium.googlesource.com/webm/libvpx.git"
   REPOLOCS[5]="https://github.com/ddennedy/movit.git"
-  REPOLOCS[6]="https://github.com/ddennedy/libspatialaudio.git"
+  REPOLOCS[6]="https://github.com/videolabs/libspatialaudio.git"
   REPOLOCS[7]="https://github.com/mltframework/shotcut.git"
   REPOLOCS[8]="https://github.com/swh/ladspa.git"
   REPOLOCS[9]="https://github.com/OpenMathLib/OpenBLAS.git"
